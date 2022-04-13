@@ -1,3 +1,6 @@
+<p align="center">
+    <img alt="project-logo" src="./.github/meta/project_logo.svg">
+</p>
 <h1 align="center">Welcome to fluffy-octo-fortnight 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-Alpha 0.1-blue.svg?cacheSeconds=2592000" />
@@ -10,6 +13,24 @@
 </p>
 
 > An example project to prove my knowledge.
+
+> These are the requirements:
+>
+> > Build an API to display and store the following information:
+> > ```
+> > eventTitle
+> > eventDate
+> > eventCity
+> > 
+> > tickets[].barcode (alphanumeric, eight digits maximum)
+> > tickets[].firstName 
+> > tickets[].lastName
+> > ```
+> > The data does not have to be stored in a database but can be stored at runtime. It should be ensured that the SOLID principles are observed, so that, for example, the data stored at runtime could be exchanged for a database by making small adjustments.
+> >
+> > What also needs to be done:
+> > - [ ] Dockerize laravel application into a image based on current version
+> > - [ ] Make a OpenAPI Specification that can be imported in postman for manual api testing
 
 ## Install
 
