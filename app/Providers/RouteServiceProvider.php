@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->eventRepository = app()->make(EventRepositoryInterface::class);
+        $this->eventRepository = app()->make(EventRepository::class);
     }
 
     /**
