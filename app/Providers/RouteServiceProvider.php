@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\interfaces\Repositories\EventRepositoryInterface;
+use App\Repositories\EventRepository;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -20,6 +22,18 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * @var EventRepository
+     */
+    protected $eventRepository;
+
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        $this->eventRepository = app()->make(EventRepositoryInterface::class);
+    }
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -30,12 +44,12 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('api')
-                ->prefix('api')
+                ->prefix('api/v1')
                 ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
         });
+
+        Route::bind('event', fn($value) => $this->eventRepository->findOrFail($value));
+
     }
 
     /**
