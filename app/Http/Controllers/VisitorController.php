@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVisitorRequest;
-use App\Http\Requests\UpdateVisitorRequest;
 use App\Http\Resources\VisitorResource;
 use App\Http\Resources\VisitorResourceCollection;
 use App\Models\Visitor;
