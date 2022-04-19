@@ -31,6 +31,7 @@ class EventTest extends TestCase
     {
         $eventDate = Carbon::now()->addDay()->toDateTimeString();
 
+        $this->assertDatabaseCount(Event::class, 0);
         $response = $this->postJson('/api/v1/events/', [
             'title' => 'Test Event',
             'date' => $eventDate
@@ -58,14 +59,15 @@ class EventTest extends TestCase
      * @test
      */
     public function test_creation_with_wrong_body()
-    {
+    {;
+        $this->assertDatabaseCount(Event::class, 0);
         $response = $this->postJson('/api/v1/events/', [
             'title' => 1,
             'date' => '2022-04-12 12:22'
         ]);
 
         $response->assertJsonValidationErrorFor('title');
-        $response->assertJsonValidationErrorFor('date');
+        $response->assertJsonValidationErrorFor('date');;
         $this->assertDatabaseCount(Event::class, 0);
     }
 

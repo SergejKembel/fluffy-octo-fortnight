@@ -26,6 +26,7 @@ class EventRepository implements EventRepositoryInterface
     {
         return Event::insert($eventDataArray);
     }
+
     public function findOrFail(int $eventId)
     {
         return Event::findOrFail($eventId);

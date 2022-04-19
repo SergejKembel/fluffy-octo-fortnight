@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\interfaces\Repositories\CityRepositoryInterface;
+use App\Repositories\CityRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(EventRepository::class, function($app) {
             return new EventRepository();
+        });
+        $this->app->bind(CityRepository::class, function($app) {
+            return new CityRepository();
         });
     }
 

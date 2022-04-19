@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,6 +28,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property \App\Models\City $city
+ * @method static \Illuminate\Database\Query\Builder|Event onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereCity($value)
+ * @method static \Illuminate\Database\Query\Builder|Event withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Event withoutTrashed()
  */
 class Event extends Model
 {
@@ -36,4 +42,12 @@ class Event extends Model
         'title',
         'date'
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function city(){
+        return $this->belongsTo(City::class, 'city');
+    }
+
 }
