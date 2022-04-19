@@ -7,7 +7,6 @@ use App\Models\Ticket;
 
 class TicketRepository implements TicketRepositoryInterface
 {
-
     public function getAllTickets()
     {
         return Ticket::all();
