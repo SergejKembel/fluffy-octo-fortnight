@@ -1,0 +1,396 @@
+openapi: 3.0.0
+info:
+  title: fluffy-octo-fortnight API Documentation
+  version: '1.0'
+  contact:
+    email: sergej.kembel@sergejkembel.de
+    name: Sergej Kembel
+tags:
+  - name: City
+  - name: Event
+  - name: Ticket
+  - name: Visitor
+servers:
+  - url: http://localhost/api/v1
+    variables: {}
+    description: local development instance
+paths:
+  '/cities/':
+    get:
+      summary: Get all cities
+      operationId: getAllCities
+      tags:
+        - City
+      responses:
+        '200':
+          description: Get all cities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityResourceCollection'
+    post:
+      summary: Create new city
+      operationId: createCity
+      tags:
+        - City
+      requestBody:
+        description: Custom payload for creating a new city
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - zip_code
+                - city
+              properties:
+                zip_code:
+                  type: integer
+                  example: 52477
+                city:
+                  type: string
+                  example: "Alsdorf"
+      responses:
+        '200':
+          description: Create new city
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityResource'
+  '/cities/{cityId}/':
+    get:
+      summary: Get single city
+      operationId: getCity
+      tags:
+        - City
+      parameters:
+        - $ref: '#/components/parameters/cityId'
+      responses:
+        '200':
+          description: Get single city
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityResource'
+  '/tickets/':
+    get:
+      summary: Get all tickets
+      operationId: getAllTickets
+      tags:
+        - Ticket
+      responses:
+        '200':
+          description: Get all tickets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResourceCollection'
+    post:
+      summary: Create new Ticket
+      operationId: createTicket
+      tags:
+        - Ticket
+      requestBody:
+        description: Custom payload for creating a new Ticket
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - barcode
+                - event_id
+                - visitor_id
+              properties:
+                barcode:
+                  type: string
+                  example: "a1b2c3d4"
+                event_id:
+                  type: integer
+                  example: 1
+                visitor_id:
+                  type: integer
+                  example: 1
+      responses:
+        '200':
+          description: Create new Ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResource'
+  '/tickets/{ticketId}/':
+    get:
+      summary: Get single Ticket
+      operationId: getTicket
+      tags:
+        - Ticket
+      parameters:
+        - $ref: '#/components/parameters/ticketId'
+      responses:
+        '200':
+          description: Get single Ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResource'
+  '/visitors/':
+    get:
+      summary: Get all visitors
+      operationId: getAllVisitors
+      tags:
+        - Visitor
+      responses:
+        '200':
+          description: Get all visitors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorResourceCollection'
+    post:
+      summary: Create new Visitor
+      operationId: createVisitor
+      tags:
+        - Visitor
+      requestBody:
+        description: Custom payload for creating a new Visitor
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstname
+                - lastname
+              properties:
+                firstname:
+                  type: string
+                  example: "Joe"
+                lastname:
+                  type: string
+                  example: "Mama"
+      responses:
+        '200':
+          description: Create new Visitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorResource'
+  '/visitors/{visitorId}/':
+    get:
+      summary: Get single Visitor
+      operationId: getVisitor
+      tags:
+        - Visitor
+      parameters:
+        - $ref: '#/components/parameters/visitorId'
+      responses:
+        '200':
+          description: Get single Visitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorResource'
+  '/events/':
+    get:
+      summary: Get all events
+      operationId: getAllEvents
+      tags:
+        - Event
+      responses:
+        '200':
+          description: Get all events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResourceCollection'
+    post:
+      summary: Create new Event
+      operationId: createEvent
+      tags:
+        - Event
+      requestBody:
+        description: Custom payload for creating a new Event
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - date
+                - city_id
+              properties:
+                title:
+                  type: string
+                  example: "Test Event"
+                date:
+                  type: string
+                  example: "2022-04-20 23:28:56"
+                city_id:
+                  type: integer
+                  example: 1
+      responses:
+        '200':
+          description: Create new Event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResource'
+  '/events/{eventId}/':
+    get:
+      summary: Get single Event
+      operationId: getEvent
+      tags:
+        - Event
+      parameters:
+        - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Get single Event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResource'
+components:
+  schemas:
+    CityResource:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Database id
+        zip_cide:
+          type: integer
+          description: German zip code
+        city:
+          type: string
+          description: Alsdorf
+        created_at:
+          type: string
+          format: date-string
+          description: Timestamp when the City was created
+        updated_at:
+          type: string
+          format: date-string
+          description: Timestamp when the City was updated
+    EventResource:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Database id
+          example: 1
+        city:
+          $ref: '#/components/schemas/CityResource'
+        title:
+          type: string
+          description: Title of event
+        date:
+          type: string
+          format: date-string
+          description: Event date
+        created_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Event was created
+        updated_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Event was updated
+    TicketResource:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Database id
+        barcode:
+          type: string
+          description: Alphanumeric barcode
+        barcode_link:
+          type: string
+          description: Image link to barcode
+        visitor:
+          $ref: '#/components/schemas/VisitorResource'
+        event:
+          $ref: '#/components/schemas/EventResource'
+        created_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Ticket was created
+        updated_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Ticket was updated
+    VisitorResource:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Database id
+        firstname:
+          type: string
+          description: Firstname
+        lastname:
+          type: string
+          description: Lastname
+        created_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Visitor was created
+        updated_at:
+          type: string
+          format: date-string
+          description: Timestamp when the Visitor was updated
+
+
+
+
+    CityResourceCollection:
+      type: array
+      items:
+        $ref: '#/components/schemas/CityResource'
+    EventResourceCollection:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventResource'
+    TicketResourceCollection:
+      type: array
+      items:
+        $ref: '#/components/schemas/TicketResource'
+    VisitorResourceCollection:
+      type: array
+      items:
+        $ref: '#/components/schemas/VisitorResource'
+  parameters:
+    cityId:
+      in: path
+      name: cityId
+      description: Database id of city
+      required: true
+      example: 1
+      schema:
+        type: integer
+      allowEmptyValue: false
+    eventId:
+      in: path
+      name: eventId
+      description: Database id of event
+      required: true
+      example: 1
+      schema:
+        type: integer
+      allowEmptyValue: false
+    ticketId:
+      in: path
+      name: ticketId
+      description: Database id of ticket
+      required: true
+      example: 1
+      schema:
+        type: integer
+      allowEmptyValue: false
+    visitorId:
+      in: path
+      name: visitorId
+      description: Database id of visitor
+      required: true
+      example: 1
+      schema:
+        type: integer
+      allowEmptyValue: false
