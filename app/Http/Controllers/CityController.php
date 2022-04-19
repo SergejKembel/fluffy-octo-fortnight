@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCityRequest;
-use App\Http\Requests\UpdateCityRequest;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CityResourceCollection;
-use App\Http\Resources\EventResource;
 use App\Models\City;
 use App\Repositories\CityRepository;
-use App\Repositories\EventRepository;
 
 class CityController extends Controller
 {
