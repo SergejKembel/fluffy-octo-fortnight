@@ -9,7 +9,7 @@ on:
 jobs:
   laravel-tests:
     env:
-      DB_HOST: localhost
+      DB_HOST: mysql
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: password
