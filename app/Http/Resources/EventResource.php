@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EventResource extends JsonResource
@@ -15,9 +14,6 @@ class EventResource extends JsonResource
      */
     public function toArray($request)
     {
-        /**
-         * @var $event Event
-         */
         $event = $this->resource;
 
         return [
