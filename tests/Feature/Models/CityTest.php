@@ -102,12 +102,13 @@ class CityTest extends TestCase
     public function test_single_city()
     {
         $this->assertDatabaseCount(City::class, 0);
-        City::factory()
+        $city = City::factory()
             ->count(1)
-            ->create();
+            ->create()
+            ->first();
         $this->assertDatabaseCount(City::class, 1);
 
-        $response = $this->getJson('/api/v1/cities/1');
+        $response = $this->getJson('/api/v1/cities/' . $city->id);
         $response->assertSuccessful();
 
         $response->assertJsonStructure([

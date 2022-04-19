@@ -117,11 +117,11 @@ class EventTest extends TestCase
 
     public function test_single_event()
     {
-        Event::factory()
+        $event = Event::factory()
             ->count(1)
             ->create();
 
-        $response = $this->getJson('/api/v1/events/1');
+        $response = $this->getJson('/api/v1/events/' . $event->first()->id);
         $response->assertSuccessful();
 
         $response->assertJsonStructure([
