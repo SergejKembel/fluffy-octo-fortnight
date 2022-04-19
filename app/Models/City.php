@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\City
@@ -12,10 +14,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int $zip_code
  * @property string $city
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Event[] $events
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection|Event[] $events
  * @property-read int|null $events_count
  * @method static \Database\Factories\CityFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|City newModelQuery()
