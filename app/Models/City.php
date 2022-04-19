@@ -37,11 +37,11 @@ class City extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'city',
+        'city_id',
         'zip_code'
     ];
 
     public function events() {
-        return $this->hasMany(Event::class, 'city');
+        return $this->hasMany(Event::class, 'city_id');
     }
 }
