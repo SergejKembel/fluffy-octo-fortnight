@@ -36,7 +36,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Event extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -47,8 +48,8 @@ class Event extends Model
     /**
      * @return BelongsTo
      */
-    public function city(){
+    public function city()
+    {
         return $this->belongsTo(City::class, 'city_id');
     }
-
 }

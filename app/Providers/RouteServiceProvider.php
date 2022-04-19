@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\interfaces\Repositories\EventRepositoryInterface;
 use App\Repositories\CityRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -57,7 +56,6 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('event', fn($value) => $this->eventRepository->findOrFail($value));
         Route::bind('city', fn($value) => $this->cityRepository->findOrFail($value));
-
     }
 
     /**

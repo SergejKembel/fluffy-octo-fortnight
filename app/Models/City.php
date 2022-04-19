@@ -34,14 +34,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class City extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'city',
         'zip_code'
     ];
 
-    public function events() {
+    public function events()
+    {
         return $this->hasMany(Event::class, 'city_id');
     }
 }

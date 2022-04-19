@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EventRepository implements EventRepositoryInterface
 {
-
     /**
      * @return Collection
      */

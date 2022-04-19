@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CityRepository implements CityRepositoryInterface
 {
-
     /**
      * @return Collection
      */
