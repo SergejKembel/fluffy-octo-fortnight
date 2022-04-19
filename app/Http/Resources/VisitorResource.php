@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Visitor;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class VisitorResource extends JsonResource
@@ -14,6 +15,16 @@ class VisitorResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        /**
+         * @var Visitor
+         */
+        $visitor = $this->resource;
+        return [
+            'id' => $visitor->id,
+            'firstname' => $visitor->firstname,
+            'lastname' => $visitor->lastname,
+            'created_at' => $visitor->created_at,
+            'updated_at' => $visitor->updated_at
+        ];
     }
 }

@@ -3,11 +3,13 @@
 namespace Tests\Feature\Models;
 
 use App\Models\City;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class CityTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * @test
      */

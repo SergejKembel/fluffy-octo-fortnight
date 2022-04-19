@@ -5,11 +5,13 @@ namespace Tests\Feature\Models;
 use App\Models\City;
 use App\Models\Event;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class EventTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Visitor;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
@@ -10,6 +11,7 @@ use Tests\TestCase;
 class VisitorTest extends TestCase
 {
     use WithFaker;
+    use RefreshDatabase;
 
     /**
      * @test
@@ -29,8 +31,6 @@ class VisitorTest extends TestCase
 
     public function test_visitor_creation()
     {
-
-
         $this->assertDatabaseCount(Visitor::class, 0);
         $response = $this->postJson('/api/v1/visitors/', [
             'firstname' => 'Vorname',
@@ -40,7 +40,7 @@ class VisitorTest extends TestCase
         $response->assertCreated();
         $response->assertJson(
             fn(AssertableJson $json) => $json
-                ->where('id', 1)
+                ->has('id')
                 ->where('firstname', 'Vorname')
                 ->where('lastname', 'Nachname')
                 ->has('updated_at')
@@ -49,7 +49,6 @@ class VisitorTest extends TestCase
 
         $this->assertDatabaseCount(Visitor::class, 1);
         $this->assertDatabaseHas(Visitor::class, [
-            'id' => 1,
             'firstname' => 'Vorname',
             'lastname' => 'Nachname',
         ]);
@@ -66,6 +65,7 @@ class VisitorTest extends TestCase
             'lastname' => $this->faker->realTextBetween(256, 300)
         ]);
 
+        $response->assertUnprocessable();
         $response->assertJsonValidationErrorFor('firstname');
         $response->assertJsonValidationErrorFor('lastname');;
         $this->assertDatabaseCount(Visitor::class, 0);

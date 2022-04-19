@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\CityRepository;
 use App\Repositories\EventRepository;
+use App\Repositories\TicketRepository;
 use App\Repositories\VisitorRepository;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -36,6 +37,10 @@ class RouteServiceProvider extends ServiceProvider
      * @var VisitorRepository
      */
     private mixed $visitorRepository;
+    /**
+     * @var TicketRepository
+     */
+    private mixed $ticketRepository;
 
 
     public function __construct($app)
@@ -44,6 +49,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->eventRepository = app()->make(EventRepository::class);
         $this->cityRepository = app()->make(CityRepository::class);
         $this->visitorRepository = app()->make(VisitorRepository::class);
+        $this->ticketRepository = app()->make(TicketRepository::class);
     }
 
     /**
@@ -64,6 +70,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('event', fn($value) => $this->eventRepository->findOrFail($value));
         Route::bind('city', fn($value) => $this->cityRepository->findOrFail($value));
         Route::bind('visitor', fn($value) => $this->visitorRepository->findOrFail($value));
+        Route::bind('ticket', fn($value) => $this->ticketRepository->findOrFail($value));
     }
 
     /**
