@@ -16,6 +16,13 @@ class EventRepository implements EventRepositoryInterface
     {
         return Event::all();
     }
+    /**
+     * @return Collection
+     */
+    public function getAllEventsWithCities(): Collection
+    {
+        return Event::with('city')->get();
+    }
 
     public function createEvent(array $eventData): Event
     {
@@ -35,6 +42,10 @@ class EventRepository implements EventRepositoryInterface
     public function getEventById(int $eventId)
     {
         return Event::find($eventId);
+    }
+    public function getEventByIdWithCity(int $eventId)
+    {
+        return Event::with('city')->find($eventId);
     }
 
     public function getEventsWithIds(array $eventIds)

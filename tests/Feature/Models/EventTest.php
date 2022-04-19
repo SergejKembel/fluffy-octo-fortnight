@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Models;
 
+use App\Models\City;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -30,11 +31,13 @@ class EventTest extends TestCase
     public function test_event_creation()
     {
         $eventDate = Carbon::now()->addDay()->toDateTimeString();
+        $city = City::factory()->count(1)->create()->first();
 
         $this->assertDatabaseCount(Event::class, 0);
         $response = $this->postJson('/api/v1/events/', [
             'title' => 'Test Event',
-            'date' => $eventDate
+            'date' => $eventDate,
+            'city_id' => $city->id
         ]);
 
         $response->assertCreated();
@@ -45,6 +48,13 @@ class EventTest extends TestCase
                 ->where('date', $eventDate)
                 ->has('updated_at')
                 ->has('created_at')
+                ->has('city', fn(AssertableJson $json) => $json
+                    ->has('id')
+                    ->has('city')
+                    ->has('zip_code')
+                    ->has('updated_at')
+                    ->has('created_at')
+                )
         );
 
         $this->assertDatabaseCount(Event::class, 1);
@@ -59,7 +69,8 @@ class EventTest extends TestCase
      * @test
      */
     public function test_creation_with_wrong_body()
-    {;
+    {
+        ;
         $this->assertDatabaseCount(Event::class, 0);
         $response = $this->postJson('/api/v1/events/', [
             'title' => 1,

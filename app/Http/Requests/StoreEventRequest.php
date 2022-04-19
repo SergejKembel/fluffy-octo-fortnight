@@ -25,7 +25,8 @@ class StoreEventRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'date' => 'required|date|after:today'
+            'date' => 'required|date|after:today',
+            'city_id' => 'required|exists:cities,id|integer'
         ];
     }
 }

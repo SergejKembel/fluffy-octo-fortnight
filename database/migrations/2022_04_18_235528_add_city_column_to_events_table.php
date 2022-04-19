@@ -15,8 +15,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->foreignIdFor(City::class, 'city')->after('title');
-            $table->foreign('city')->references('id')->on('cities');
+            $table->foreignIdFor(City::class, 'city_id')->after('title');
+            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 

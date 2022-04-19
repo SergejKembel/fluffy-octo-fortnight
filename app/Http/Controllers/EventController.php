@@ -24,7 +24,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return new EventResourceCollection($this->eventRepository->getAllEvents());
+        return new EventResourceCollection($this->eventRepository->getAllEventsWithCities());
     }
 
     /**

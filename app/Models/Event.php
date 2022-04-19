@@ -40,14 +40,15 @@ class Event extends Model
 
     protected $fillable = [
         'title',
-        'date'
+        'date',
+        'city_id'
     ];
 
     /**
      * @return BelongsTo
      */
     public function city(){
-        return $this->belongsTo(City::class, 'city');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
 }
