@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\Visitor;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class TicketSeeder extends Seeder
@@ -26,11 +27,13 @@ class TicketSeeder extends Seeder
 
         Ticket::factory()
             ->count(300)
-            ->create()
-            ->each(function (Ticket $ticket) use ($events, $visitors) {
-                $ticket->visitor_id = $visitors->random(1)->first()->id;
-                $ticket->event_id = $events->random(1)->first()->id;
-            });
+            ->state(new Sequence(
+                fn ($sequence) => [
+                    'event_id' => $events->random()->id,
+                    'visitor_id' => $visitors->random()->id
+                ],
+            ))
+            ->create();
 
     }
 }

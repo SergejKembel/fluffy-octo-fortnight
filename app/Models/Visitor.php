@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Database\Factories\VisitorFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -16,19 +19,19 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @method static \Database\Factories\VisitorFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor newQuery()
- * @method static \Illuminate\Database\Query\Builder|Visitor onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor query()
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereFirstname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereLastname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Visitor whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|Visitor withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Visitor withoutTrashed()
+ * @method static VisitorFactory factory(...$parameters)
+ * @method static Builder|Visitor newModelQuery()
+ * @method static Builder|Visitor newQuery()
+ * @method static Builder|Visitor onlyTrashed()
+ * @method static Builder|Visitor query()
+ * @method static Builder|Visitor whereCreatedAt($value)
+ * @method static Builder|Visitor whereDeletedAt($value)
+ * @method static Builder|Visitor whereFirstname($value)
+ * @method static Builder|Visitor whereId($value)
+ * @method static Builder|Visitor whereLastname($value)
+ * @method static Builder|Visitor whereUpdatedAt($value)
+ * @method static Builder|Visitor withTrashed()
+ * @method static Builder|Visitor withoutTrashed()
  * @mixin \Eloquent
  */
 class Visitor extends Model
@@ -40,4 +43,9 @@ class Visitor extends Model
         'firstname',
         'lastname'
     ];
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
