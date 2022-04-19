@@ -1,0 +1,26 @@
+name: Publish swagger ui with documentation to GitHub Pages
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate swagger ui
+        uses: Legion2/swagger-ui-action@v1.1.2
+        with:
+          output: /tmp/swagger-ui
+          spec-file: documentation.yml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/swagger-ui
