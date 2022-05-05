@@ -8,7 +8,7 @@
     <img alt="License: Apache License 2.0" src="https://img.shields.io/badge/License-Apache License 2.0-yellow.svg" />
   </a>
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/sergejkembel/fluffy-octo-fortnight/Laravel%20application%20testing%20(Mysql)?label=Laravel%20Tests">
-<a href=""><img src="https://img.shields.io/badge/Documentation-Click%20me-blue.svg" alt="Read the Documentation"></a>
+<a href="https://sergejkembel.github.io/fluffy-octo-fortnight/"><img src="https://img.shields.io/badge/Documentation-Click%20me-blue.svg" alt="Read the Documentation"></a>
   <a href="https://twitter.com/sergej_kembel" target="_blank">
     <img alt="Twitter: sergej_kembel" src="https://img.shields.io/twitter/follow/sergej_kembel.svg?style=social" />
   </a>
